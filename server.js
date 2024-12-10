@@ -20,7 +20,7 @@ initializeDatabase();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: process.env.CLIENT_URL||'http://localhost:3000',
   credentials: true
 }));
 app.use(express.json());
@@ -63,5 +63,5 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at ${process.env.CLIENT_URL}`);
 });

@@ -20,7 +20,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://project-jp4c.onrender.com/auth/google/callback",
+      callbackURL: "https://project-gamma-mocha-34.vercel.app/auth/google/callback",
       passReqToCallback: true
     },
     async function(request, accessToken, refreshToken, profile, done) {

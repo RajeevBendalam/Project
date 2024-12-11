@@ -20,7 +20,7 @@ initializeDatabase();
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL||'http://localhost:3000',
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
   credentials: true
 }));
 app.use(express.json());
@@ -51,8 +51,8 @@ function isAuthenticated(req, res, next) {
 app.use('/auth', authRoutes);
 
 // Protected route
-app.get('/dashboard.html', isAuthenticated, (req, res, next) => {
-  next();
+app.get('/dashboard.html', isAuthenticated, (req, res) => {
+  res.sendFile(__dirname + '/public/dashboard.html');
 });
 
 // Error handling middleware
@@ -61,7 +61,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, error: 'Internal server error' });
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running at ${process.env.CLIENT_URL}`);
-});
+// Export the app as a serverless function for Vercel
+export default (req, res) => {
+  app(req, res);
+};
